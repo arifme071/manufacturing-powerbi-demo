@@ -1,48 +1,52 @@
-# manufacturing-powerbi-demo
+# SmartFactory-Analytics-Manufacturing-PowerBI-Demo
 
-# Manufacturing Power BI Demo Dataset & Dashboard
+## Overview  
+This repository provides a comprehensive demo project to generate a synthetic manufacturing dataset optimized for Power BI analytics.  
+It focuses on a **single product with multiple sizes**, multiple production teams and shifts, detailed production cost breakdowns, supply & demand data, and geographic locations.  
 
-## Overview
-This repository provides a complete solution for generating a synthetic manufacturing dataset and building a Power BI dashboard with key KPIs.  
-You get:
-
-- SQL code that creates three main tables (`Products`, `ProductionTeams`, `ProductionTransactions`), inserts sample metadata, and bulk-generates 10,000 production records—with deliberate data quality issues (date formats, nulls, outliers, mixed units, typos).
-- Columns include product size, production cost breakdown (raw, labor, overhead), supply/demand/sales data, and geographical location.
-- Cleaning steps (date standardization).
-- Creation of a combined dataset for direct import into Power BI.
-- Dashboard instructions with KPI recommendations and DAX formulas.
-
-## Usage Instructions
-
-1. **Run `manufacturing_dataset.sql` in SQL Server Management Studio (SSMS).**
-2. **Open Power BI Desktop → Get Data → SQL Server.**  
-   Load the table `CombinedManufacturingDataset`.
-3. **Design dashboard pages:**
-    - Page 1: Output & Efficiency — Throughput, Downtime, OEE, Overtime Ratio, Material & Cost breakdown.
-    - Page 2: Quality & Region — Defect Rate, Supply vs Demand, Sales by Region, Cost by Location.
-4. **Recommended cleaning/transformations in Power Query:**
-    - Standardize units (convert grams to kg)
-    - Trim whitespace, fix text casing
-    - Remove duplicate records (if needed)
-5. **Create visuals for the provided KPIs with DAX calculations (see below).**
-6. **Publish or share your Power BI report.**
+The dataset includes intentional data quality issues such as mixed date formats, typos, nulls, duplicates, outliers, and unit inconsistencies to enable realistic data cleaning and analysis practice.
 
 ---
 
-## KPI Visuals & DAX Formulas
+## Key Features
 
-| KPI                      | Description                      | Chart   | DAX Formula Example                                       |
-|--------------------------|----------------------------------|---------|-----------------------------------------------------------|
-| Throughput               | Total units produced             | Line/Col| Throughput = SUM(QuantityProduced)                        |
-| Defect Rate (%)          | % defects of total produced      | Card    | DefectRate = DIVIDE(SUM(QuantityDefective), SUM(QuantityProduced)) |
-| Avg Total Production Cost| Mean of all production costs     | Gauge   | AvgCost = AVERAGE(TotalProductionCost)                    |
-| Production Cost Breakdown| Raw, Labor, Overhead             | Bar/Stack| Use RawMaterialCost, LaborCost, OverheadCost columns      |
-| Supply-Demand Gap        | Surplus or shortage              | Line/Bar| SupplyDemandGap = SUM(SupplyQty) - SUM(DemandQty)         |
-| Sales by Location        | Sale units per region            | Map/Col | SalesGeo = SUM(SaleUnits)                                 |
-| Overtime Ratio           | Overtime vs regular hours        | KPI/Col | OvertimeRatio = DIVIDE(SUM(OvertimeHours), SUM(RegularHours)) |
-| Downtime                 | Total downtime minutes           | Col     | TotalDowntime = SUM(DowntimeMinutes)                      |
+- SQL scripts to create and populate:
+  - `Products` table (with sizes)
+  - `ProductionTeams` table (multiple shifts and teams)
+  - `ProductionTransactions` table (10,000+ synthetic records with messy data)
+- Data cleaning scripts standardizing dates
+- Combined manufacturing dataset ready for Power BI import
+- Power BI KPI recommendations and DAX formulas included
 
 ---
 
-## License
-MIT License — Free for academic, training, and demo use.
+## Power BI Dashboard KPIs
+
+| KPI                      | Description                      | Chart Type     | Sample DAX Formula                                          |
+|--------------------------|--------------------------------|----------------|-------------------------------------------------------------|
+| Throughput               | Total produced units           | Line/Column    | `Throughput = SUM(QuantityProduced)`                         |
+| Defect Rate (%)          | Percentage defective units     | KPI Card      | `DefectRate = DIVIDE(SUM(QuantityDefective), SUM(QuantityProduced))`  |
+| Downtime Minutes          | Total downtime reported        | Column         | `TotalDowntime = SUM(DowntimeMinutes)`                       |
+| Overtime Ratio           | Overtime hours vs regular hours | Column/KPI    | `OvertimeRatio = DIVIDE(SUM(OvertimeHours), SUM(RegularHours))`        |
+| Average Production Cost  | Average total production cost  | Gauge          | `AvgProdCost = AVERAGE(TotalProductionCost)`                 |
+| Supply-Demand Gap         | Difference between supply & demand | Line/Bar   | `SupplyDemandGap = SUM(SupplyQty) - SUM(DemandQty)`          |
+| Sales by Location         | Units sold by geographical region | Map/Column | `SalesGeo = SUM(SaleUnits)`                                  |
+
+---
+
+## Getting Started
+
+1. Run `manufacturing_dataset.sql` in SQL Server Management Studio.
+2. Open Power BI Desktop and load the `CombinedManufacturingDataset` table from your SQL Server.
+3. Clean data as needed using Power Query (e.g., convert units, trim text, handle duplicates).
+4. Build reports using recommended KPIs and visualizations above.
+5. Publish or share as desired.
+
+---
+
+## License  
+MIT License — Free to use for educational, demonstration, and training purposes.
+
+---
+
+*Last Updated: [Insert Date]*
