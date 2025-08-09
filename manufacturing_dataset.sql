@@ -1,3 +1,20 @@
+/*
+  SmartFactory-Analytics-Manufacturing-PowerBI-Demo
+  -----------------------------------------------
+  This script creates a synthetic manufacturing dataset with data quality issues,
+  designed for Power BI dashboard practice on production KPIs and optimization metrics.
+
+  Features:
+  - Database and tables creation for Products, ProductionTeams, and ProductionTransactions
+  - Inserts base metadata and generates 10,000 production records covering multiple sizes, shifts, teams
+  - Contains deliberate messy data (dates in mixed formats, typos, outliers, duplicates, mixed units)
+  - Breaks down production cost (raw materials, labor, overhead, total)
+  - Adds supply, demand, sales data plus geographical locations
+  - Data cleaning steps for date standardization
+  - Creates CombinedManufacturingDataset for export/import into Power BI
+
+  Use this script to load realistic test data in SQL Server and build KPI dashboards in Power BI.
+*/
 -- ============================================
 -- Database & Tables Setup
 -- ============================================
