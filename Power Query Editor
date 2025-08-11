@@ -1,0 +1,19 @@
+# Power Query Editor
+
+For [MaterialUsedKg_]
+
+= let
+    // Convert everything to text and lowercase
+    valueText = Text.Lower(Text.From([MaterialUsedKg])),
+    // Remove all spaces, tabs, and non-breaking spaces
+    noSpaces = Text.Select(valueText, {"0".."9",".","g","k"}),
+    // Logic to detect units and convert
+    result =
+        if Text.EndsWith(noSpaces, "g") and not Text.EndsWith(noSpaces, "kg") then 
+            Number.From(Text.Remove(noSpaces, {"g"})) / 1000
+        else if Text.EndsWith(noSpaces, "kg") or Text.EndsWith(noSpaces, "k") then 
+            Number.From(Text.Remove(noSpaces, {"k","g"}))
+        else 
+            try Number.From(noSpaces) otherwise null
+in
+    result
